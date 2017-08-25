@@ -53,8 +53,8 @@ def down_photo(url):
         photo = get_page(url, is_text=False)
         with open(path, 'wb') as f:
             f.write(photo)
-    # else:
-        # print('文件已存在')
+    else:
+        print('文件已存在')
 
 def process_way(func, urls):
     workers = 10
@@ -62,7 +62,7 @@ def process_way(func, urls):
         re = p.map(func, urls)
     return re
 
-def main(depth):
+def main():
     global encoding
 
     base_url = 'http://www.xiuren.org'
@@ -77,14 +77,14 @@ def main(depth):
             count += 1
             # print(photo_links)
             process_way(down_photo, photo_links)
-            # print(count)
-            if depth <= count:
-                print('Done')
-                break
+            print(count)
+            # if depth <= count:
+            #     print('Done')
+            #     break
         except:
             traceback.print_exc()
             continue
 
 if __name__ == '__main__':
-    main(10)
+    main()
     # test()
